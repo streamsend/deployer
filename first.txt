@@ -1,0 +1,217 @@
+As of 3339e80
+
+*  Add barker for new triggers report page
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87842248 87842248]
+    * feature,  delivered , PROJECT = StreamSend Franchise
+      *  3339e80 Add barker for new trigger report tab
+*  Sort triggers DESC on triggers report page.
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87842102 87842102]
+    * bug,  delivered , PROJECT = StreamSend Franchise
+      *  b6a64bc Sort triggers DESC on triggers report page
+*  As a StreamSend user I want to upload a list of addresses that are always good
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87553446 87553446]
+    * feature,  started , PROJECT = StreamSend Infrastructure
+      *  01e0008 Move global white list to DDD style path
+*  Account Consolidation (#3148)
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87332730 87332730]
+    * chore,  started , PROJECT = StreamSend P1
+      *  d20177a Create rake task to convert account to sub account or standard account
+* not-a-story bug
+      *  53311c1 Fix code for owner csv report headers that was breaking on Ruby 2.0
+*  CRUD for white lists
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86061516 86061516]
+    * feature,  accepted 2015-01-24T02:27:06+00:00, PROJECT = StreamSend Franchise
+      *  ea80241 Clean up JSON for whitelists per code review
+      *  55e21da Refactor add whitelist endpoint to utilize added validations
+      *  09b2897 Add additional validation to from email address domain whitelist
+*  The new editor stml popup should always stay in the editor viewing area while not covering the thing it's attached to. 
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/82613460 82613460]
+    * feature,  accepted 2015-02-05T21:37:59+00:00, PROJECT = StreamSend Franchise
+      *  2de61bf Adjust the tolerance for new editor popup appearing on left side of small elements
+      *  f5ebaef Add positioning logic to ensure the stml popup for small elements doesn't move out the viewport
+*  As a deployer, I should not see Rails configuration warnings in the deploy log
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87737620 87737620]
+    * chore,  accepted 2015-02-05T18:13:45+00:00, PROJECT = StreamSend P1
+      *  8214e5a Send deprecation notices to registered listeners
+*  As a user when I import subscribers, I should have a new list created with a name of a list that doesn't already exist
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86342134 86342134]
+    * feature,  delivered , PROJECT = StreamSend P1
+      *  c57be34 Increment import list name when duplicates exist
+*  Implement Lists as streamstrap multiselect in new blast flow.
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/84064832 84064832]
+    * feature,  started , PROJECT = StreamSend Franchise
+      *  971b477 Refactor loadSubscriberListService in new_blast, removing injection of scope.
+      *  c4c2d9b Replace checkboxes in new blast subscriber lists with ss-ui-multiselect
+      *  fa19a71 Add updated dependencies to new_blast for Angular 1.3 (ngSanitize and bower components). Remove lodash require from individual files, include it in the blast_send/app.js entry file.
+      *  24483a3 Update bower_components: angular-bootstrap-datepicker, angular-sanitize, streamstrap
+      *  278cf23 Load bower_components from rails framework for new_blast, using angular 1.3
+      *  10ceb2b Add angular-animate library via bower
+*  Trigger Reporting part 3 .. Make the Custom Report listing look more like the Blast Reports and Trigger Reports listings. 
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/85839056 85839056]
+    * feature,  accepted 2015-02-05T17:30:39+00:00, PROJECT = StreamSend Franchise
+      *  6a4cbc7 Update report/custom_controller #search specs to test instance_variable defaults
+      *  c9ef67d Fix type in paginated_search in custom_report controller
+      *  7e850f5 Wrap blast_finder specs in timecop blocks
+      *  63fd3a7 Eager load blast_finder in blast_finder spec
+      *  00911e5 Remove Blast Result Header in report/custom#index
+      *  fd7e7dd Add pagination to report/custom/index view
+      *  f2dc63b Update custom report view to display owner detail when blast record is expanded and franchise is enabled.
+      *  38f7614 Add pagination to report/custom/index, update form to use 'get' instead of 'post'
+      *  216e1a7 Add delivered column to custom reports
+      *  fa4cf5c Update @blasts in the view to point to the collection property of the paginated collection
+      *  e6b1b9f Add pagination to view for custom reports.
+*  Create basic action node reporting
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86882938 86882938]
+    * feature,  accepted 2015-02-04T19:39:01+00:00, PROJECT = StreamSend Share
+      *  81b7f99 Add tab for insights workflow reports
+*  Test emails not sending from new blast process
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87255030 87255030]
+    * bug,  accepted 2015-02-03T22:49:19+00:00, PROJECT = StreamSend Franchise
+      *  4654302 Fix issue of not being able to send test emails from new blast process
+*  Delete Templates on Accounts(#3149)
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87332956 87332956]
+    * chore,  accepted 2015-02-04T21:12:15+00:00, PROJECT = StreamSend P1
+      *  ab1a5fe Add rake task to delete subaccount custom templates
+* not-a-story None
+      *  0e0714e Merge branch 'master' into spike_85839056
+      *  b141e2d Merge branch 'spike_85839056' of git.ezpublishing.com:ezpub/streamsend into spike_85839056
+      *  cc915c2 Merge branch 'spike_85839056' of git.ezpublishing.com:ezpub/streamsend into spike_85839056
+      *  291a8a4 Merge branch 'spike_87159698_new_blast_angular_1_3_update'
+      *  db7934e Merge branch 'spike_87159698_new_blast_angular_1_3_update' of git.ezpublishing.com:ezpub/streamsend into spike_87159698_new_blast_angular_1_3_update
+      *  7022e64 Merge branch 'master' into spike_87159698_new_blast_angular_1_3_update
+      *  e274f10 Merge branch 'master' into spike_87159698_new_blast_angular_1_3_update
+      *  c49dd77 Merge remote-tracking branch 'origin'
+      *  85a19d1 Revert "Add angular-animate library via bower"
+      *  126c658 Revert "Load bower_components from rails framework for new_blast, using angular 1.3"
+*  As a StreamSend User with the template flag I should be able to use custom templates
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/83685792 83685792]
+    * feature,  accepted 2015-01-16T18:33:50+00:00, PROJECT = StreamSend Infrastructure
+      *  10a3a03 FIx controller test
+      *  51e1da2 prevent custom template image uploads until security is addressed.
+*  Owner stats % should be % of Owner total not of blast total for blast reporting, trigger reporting, custom reporting. 
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86276728 86276728]
+    * feature,  accepted 2015-01-31T00:18:08+00:00, PROJECT = StreamSend Franchise
+      *  ba716ca Update owner stats percentage for triggers so they are percent of owner's totals, and not percentage of the total blast
+      *  c3b2635 Update owner stats percentage to be percentage of owner's totals, not percentage of the total blast
+*  Looks like Unique Viewers on the Blast Reports Owners tab rows is showing Total Viewers.     
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87326406 87326406]
+    * bug,  accepted 2015-02-02T16:16:58+00:00, PROJECT = StreamSend Franchise
+      *  a311e4a Show unique clicks and views instead of totals on owner's tab
+*  Break up blast sender javascript components into individual files and store them in the new streamsend-ui.git repo
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/82048642 82048642]
+    * feature,  accepted 2015-02-03T17:08:52+00:00, PROJECT = StreamSend Share
+      *  296a1fd Allow stats to access /blast_address.json from browsers
+      *  fdbf9fa Move checkIndividualSenderActivationService to streamsend-ui
+      *  d9d91ab Move loadBlastAddressesService to streamsend-ui
+      *  052e85b Deleted functions that were moved from blast_send to streamsend-ui
+      *  0f85480 Remove some duplication in blast-address-dropdown spec
+      *  c0e6f83 Move #styleSelectedAddress to blast-adddress-dropdown directive
+      *  4f7394e Move hideUnconfirmedBox method to blast-address-dropdown directive
+      *  7a075f2 Move sendersStyle method to blast-address-dropdown directive
+      *  adc5742 Move toggleBlastAddressDropdown method to blast-address-dropdown directive
+      *  a1da9c9 Move createBlastAddressService and updateBlastAddressService to streamsend-ui
+      *  1300789 Move emailProviderService from blast send to streamsend-ui. Get rid of your mom.
+      *  0c9973c Add entry: true back since it is needed. Fix requires.
+      *  485461d Remove extra option in gulpfile that doesn't appear to be necessary
+      *  ca175a2 Move email format validation service to streamstrap-ui. Move streamsend-ui under blast_send directory to make sure everything is built correctly. This directory will eventually go into the streamsend-ui project.
+*  Importing a user to a "new" list that's name has already been taken results in no users being imported to the list
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86329500 86329500]
+    * bug,  delivered , PROJECT = StreamSend P1
+      *  051700c Fix Importing subscribers to a new list if the name already exists
+*  Update new_blast to angular 1.3
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87159698 87159698]
+    * feature,  accepted 2015-01-30T17:51:11+00:00, PROJECT = StreamSend Franchise
+      *  eff975e test blast send
+      *  cf2b9f4 Remove reference to old angular-mocks library.
+      *  7e21b31 Convert string true to boolean for draftChanged in new_blast
+      *  456dfca Remove uneeded angular-mocks from streamsend-ui services specs
+      *  fd9efcc Merge master into spike_87159698_new_blast_angular_1_3_update and resolve conflict in compiled file public/javascripts/dist/blast_send.js by recompiling the file.
+      *  216f806 Remove reference to public/javascripts/angular.js in the asset_packager.yml and replace with public/bower_components/angular/angular.js (Angular 1.3)
+      *  5c405bd Remove angular and angular-ui-date from package.json
+      *  bb670c5 Remove angular modules from public/javascripts & update jasmine.yml with bower angular components
+      *  4f04418 Update new blast and dependencies to angular 1.3 in bower components.
+*  Add filter for preview to replace "max-device-width" versus "max-width" in the media query 
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86152528 86152528]
+    * feature,  accepted 2015-01-30T22:15:11+00:00, PROJECT = StreamSend Franchise
+      *  dfad939 Add packager filter for replacing max-device-width @media queries with max-width in blast previews
+*  Add whitelist senders option
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/82960124 82960124]
+    * feature,  accepted 2015-01-24T03:58:17+00:00, PROJECT = StreamSend Franchise
+      *  a5e3933 Fix issue with emails being activated automatically without verification, and add coverage for bad data, re: nil email_address
+      *  2369b9e Call activation orchestrator in identity controller to bulk activate domain
+      *  873e41a Add activated domain to white list if the domain is not on the black list
+      *  2a84dc7 Update audience owner_controller to call new auto_activate_or_send_activation_email method
+      *  ec5edb6 Update owner to call new auto_activate_or_send_activation_email method
+      *  0fcebbc Replace FromEmailAddress.send_activation_email with auto_activate_or_send_activation_email in activation_orchestrator
+      *  ff795ac Refactor and cleanup specs for identity_controller
+      *  d021c33 Remove from email auto activation code from from_email_addresses_controller
+      *  e4a5691 Remove FromEmailAddressActivator call from accounts_controller, and make the call in identity_controller
+      *  fdfb4e1 Update bulk_activation of domains
+      *  37ff1dd Add bulk activation of domain names
+*  Adding an individual subscriber via the app gui and selecting a list as part of the add causes that list count to increment by 2.   
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/84853574 84853574]
+    * bug,  accepted 2015-01-30T17:46:59+00:00, PROJECT = StreamSend P2
+      *  5c252b0 Fix miscounting when adding new subscribers one at time.
+*  Type dropdown should default to all_blasts in custom_reports filters
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87224424 87224424]
+    * chore,  accepted 2015-01-29T18:29:28+00:00, PROJECT = StreamSend Franchise
+      *  40baf8c Type filter now defaults to all_blasts in custom_report filters
+*  triggers dropdown should disappear 
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87176692 87176692]
+    * bug,  accepted 2015-01-30T17:02:00+00:00, PROJECT = StreamSend Franchise
+      *  89c6d24 Display none when regular_blasts or all_blasts selected in custom_reports filters
+*  Custom Reports selection console error: ngModel.$setTouch undefined.
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87224734 87224734]
+    * bug,  accepted 2015-01-30T17:51:18+00:00, PROJECT = StreamSend Franchise
+      *  006ea54 Force Angular v1.3 on custom reporting to remove error caused by streamstrap dependency on Angular 1.3
+*  Set default text on email multi-selects to "Select users to send to" 
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/85747098 85747098]
+    * feature,  accepted 2015-01-29T16:10:03+00:00, PROJECT = StreamSend Franchise
+      *  f2216ed Update default text in send_report and send_test_email widets to 'Select Users'
+*  Trigger Reporting part 2 .. Add the View Report for a trigger
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/85735842 85735842]
+    * feature,  accepted 2015-01-29T16:10:12+00:00, PROJECT = StreamSend Franchise
+      *  65d0d03 Add form for building custom report on trigger report page.
+      *  449a13b Add link to custom reports from trigger show
+*  As a StreamSend User I want to see soft and hard bounces broken out on the pie chart in reports.
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86925548 86925548]
+    * bug,  accepted 2015-01-28T23:52:56+00:00, PROJECT = StreamSend Franchise
+      *  fc1a6f0 Change single blast presenter to use hard_bounces_count instead of bounces for reporting bounces.
+*  Streamsend support for Litmus.com (#3097)
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86466890 86466890]
+    * feature,  delivered , PROJECT = StreamSend P2
+      *  6bd7cac Leave style tags in the body if they have the 'scoped' attribute
+* not-a-story cleanup
+      *  5fa7475 Fix failing spec for Casey
+*  Add ss-placeholder to streamstrap multiselect.
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87031946 87031946]
+    * feature,  accepted 2015-01-28T19:37:19+00:00, PROJECT = StreamSend Franchise
+      *  414201f Update streamstrap library for ss-placeholder attribute support in ss-multiselect.
+*  Update specs per code review feedback
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/87048392 87048392]
+    * chore,  accepted 2015-01-27T22:06:08+00:00, PROJECT = StreamSend Franchise
+      *  a07fb29 Update specs for BlastMapper
+      *  ed6a985 Update specs for Report:TriggerController
+*  count should update when deleted in whitelist
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86844686 86844686]
+    * bug,  accepted 2015-01-29T18:49:34+00:00, PROJECT = StreamSend Franchise
+      *  85e350b Update count on domain whitelist multiselect when domain is deleted
+*  checkbox cut off in whitelist
+  * Pivotal Tracker [https://www.pivotaltracker.com/story/show/86844674 86844674]
+    * bug,  accepted 2015-01-29T18:49:33+00:00, PROJECT = StreamSend Franchise
+      *  d23d9b0 Set margin on checkboxes so they don't get cut off
+* not-a-story branching
+      *  44a1b3a Recommit whitelisting that was taken out because of the branch
+      *  2bdeb17 Remove whitelisting temporarily for release branch.
+
+Delayed Jobs
+* app/jobs/whitelist_blast_processing_job.rb
+
+Gems
+
+Migrations
+
+Rake Tasks
+* lib/tasks/account.rake
+* lib/tasks/create_subaccount_templates_from_emails.rake
+
