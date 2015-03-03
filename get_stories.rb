@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require "./pivotal.rb"
 require "./release.rb"
 require "yaml"

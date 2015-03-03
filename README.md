@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Add token, path, and version in config/creds.yml
+2. Run `bundle install`
+3. Run `get_stories.rb`
 
 ## Contributing
 
