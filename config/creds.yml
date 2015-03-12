@@ -1,3 +1,2 @@
 pivotal_token: <get this form pivotal-tracker account settings>
-streamsend_dir: /Users/<yourpath>/projects/streamsend-root/streamsend
-previous_version: v2.96
+project_dir: /Users/<yourpath>/projects/streamsend-root/streamsend

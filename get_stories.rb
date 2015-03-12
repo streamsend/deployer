@@ -4,13 +4,29 @@ require "./pivotal.rb"
 require "./release.rb"
 require "yaml"
 require "ostruct"
+require "trollop"
 
+options = Trollop::options do
+  @CREDS = OpenStruct.new(YAML.load_file('config/creds.yml'))
 
-@CREDS = OpenStruct.new(YAML.load_file('config/creds.yml'))
-raise "pivotal_token not scecified in creds.yml" unless  @CREDS.pivotal_token
-pivotal = PivotalActions.new(@CREDS.pivotal_token)
+  banner <<-TEXT
+        Pivotal Release Notes Generator
 
-release = Release.new(@CREDS.streamsend_dir, @CREDS.previous_version)
+            Usage: get_stories.rb [options]
+  TEXT
+
+  opt :previous_version, "The last released version", type: :string
+  opt :pivotal_token, "The pivotal token", type: :string, default: @CREDS.pivotal_token
+  opt :project_dir, "The project directory", type: :string, default: @CREDS.project_dir
+end
+
+Trollop::die :pivotal_token, "must be set" unless options[:pivotal_token]
+Trollop::die :previous_version, "must be set" unless options[:previous_version]
+Trollop::die :project_dir, "must be set" unless options[:project_dir]
+
+pivotal = PivotalActions.new(options[:pivotal_token])
+
+release = Release.new(options[:project_dir], options[:previous_version])
 git_log = release.commits
 
 last_commit = git_log.first.split(" ")[0]
