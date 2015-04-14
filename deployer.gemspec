@@ -6,8 +6,8 @@ require 'deployer/version'
 Gem::Specification.new do |spec|
   spec.name          = "deployer"
   spec.version       = Deployer::VERSION
-  spec.authors       = ["Ed Gibbs"]
-  spec.email         = ["edgibbs@streamsend.com"]
+  spec.authors       = ["Kevin Fries", "Ed Gibbs", "John Gedeon"]
+  spec.email         = ["kfries@ezpublishing.com", "edgibbs@streamsend.com", "jgedeon@ezpublishing.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}
   spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
@@ -26,4 +26,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-nav"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "webmock"
 end

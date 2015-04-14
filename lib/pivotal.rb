@@ -17,10 +17,12 @@ class PivotalActions
   end
 
   def story(story_id)
-    story = nil
-    story ||= story_from_project(story_id, @latest_project) if @latest_project
-    projects.collect do |project|
-      story ||= story_from_project(story_id, project)
+    if @latest_project
+      story = story_from_project(story_id, @latest_project)
+    else
+      projects.detect do |project|
+        story = story_from_project(story_id, project)
+      end
     end
     story
   end
@@ -28,12 +30,11 @@ class PivotalActions
   private
 
   def story_from_project(story_id, project)
-    story = nil
     begin
       story = project.story(story_id)
       @latest_project = project
     rescue
-      nil
+      story = nil
     end
     story
   end
@@ -41,5 +42,4 @@ class PivotalActions
   def client
     @client ||= TrackerApi::Client.new(:token => @token)
   end
-
 end
