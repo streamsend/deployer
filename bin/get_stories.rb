@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require "./pivotal.rb"
-require "./release.rb"
+require_relative "../lib/pivotal.rb"
+require_relative "../lib/release.rb"
 require "yaml"
 require "ostruct"
 require "trollop"
