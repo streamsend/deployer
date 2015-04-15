@@ -1,9 +1,12 @@
+require "active_support"
 require "tracker_api"
 
 class PivotalActions
+ActiveSupport::Deprecation.silenced = true
 
   def initialize(token)
     @token = token
+    @project_stories = {}
   end
 
   def projects
@@ -17,27 +20,21 @@ class PivotalActions
   end
 
   def story(story_id)
-    if @latest_project
-      story = story_from_project(story_id, @latest_project)
-    else
-      projects.detect do |project|
-        story = story_from_project(story_id, project)
+    if story_id.match(%r/^\d+$/)
+      puts story_id
+      project = projects.detect do |project|
+        story_ids = @project_stories[project.id]
+        unless story_ids
+          story_ids = project.stories.map(&:id)
+          @project_stories[project.id] = story_ids
+        end
+        story_ids.include?(story_id.to_i)
       end
+      project.story(story_id) if project
     end
-    story
   end
 
   private
-
-  def story_from_project(story_id, project)
-    begin
-      story = project.story(story_id)
-      @latest_project = project
-    rescue
-      story = nil
-    end
-    story
-  end
 
   def client
     @client ||= TrackerApi::Client.new(:token => @token)

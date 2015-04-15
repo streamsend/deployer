@@ -4,7 +4,7 @@ require_relative "../../lib/pivotal"
 describe PivotalActions do
   let(:token) { "my_secret_token" }
   let!(:pivotal) { PivotalActions.new(token) }
-  let(:story_id) { 12 }
+  let(:story_id) { 12.to_s }
   let(:projects_response) do <<-JSON
 [
    {
@@ -79,13 +79,16 @@ describe PivotalActions do
 ]
     JSON
   end
+  let(:stories_response) do
+    "[" + story_response + "]"
+  end
   let(:story_response) do <<-JSON
 {
    "created_at": "2015-04-07T12:00:00Z",
    "current_state": "unstarted",
    "description": "ignore the droids",
    "estimate": 2,
-   "id": 555,
+   "id": #{story_id},
    "kind": "story",
    "labels":
    [
@@ -111,6 +114,16 @@ describe PivotalActions do
     stub_request(:get, "https://www.pivotaltracker.com/services/v5/projects/98/stories/#{story_id}").
       with(:headers => {'Host'=>'www.pivotaltracker.com:443', 'User-Agent'=>'Ruby/2.2.1 (x86_64-darwin14; ruby) TrackerApi/0.2.7 Faraday/0.9.1', 'X-Trackertoken'=>'my_secret_token'}).
       to_return(:status => 200, :body => story_response, :headers => {content_type: "application/json; potentially-other-variable-stuff", "X-Tracker-Project-Version" => 62})
+    stub_request(:get, "https://www.pivotaltracker.com/services/v5/projects/99/stories/#{story_id}").
+      with(:headers => {'Host'=>'www.pivotaltracker.com:443', 'User-Agent'=>'Ruby/2.2.1 (x86_64-darwin14; ruby) TrackerApi/0.2.7 Faraday/0.9.1', 'X-Trackertoken'=>'my_secret_token'}).
+      to_return(:status => 200, :body => "{}", :headers => {content_type: "application/json; potentially-other-variable-stuff", "X-Tracker-Project-Version" => 62})
+
+    stub_request(:get, "https://www.pivotaltracker.com/services/v5/projects/98/stories").
+      with(:headers => {'Host'=>'www.pivotaltracker.com:443', 'User-Agent'=>'Ruby/2.2.1 (x86_64-darwin14; ruby) TrackerApi/0.2.7 Faraday/0.9.1', 'X-Trackertoken'=>'my_secret_token'}).
+      to_return(:status => 200, :body => stories_response, :headers => {content_type: "application/json; potentially-other-variable-stuff", "X-Tracker-Project-Version" => 62})
+    stub_request(:get, "https://www.pivotaltracker.com/services/v5/projects/99/stories").
+      with(:headers => {'Host'=>'www.pivotaltracker.com:443', 'User-Agent'=>'Ruby/2.2.1 (x86_64-darwin14; ruby) TrackerApi/0.2.7 Faraday/0.9.1', 'X-Trackertoken'=>'my_secret_token'}).
+      to_return(:status => 200, :body => "[]", :headers => {content_type: "application/json; potentially-other-variable-stuff", "X-Tracker-Project-Version" => 62})
   end
 
   it "gets the projects"  do

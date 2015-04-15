@@ -44,7 +44,7 @@ stories_hash.each do |storyid,v|
   end
 
   v.each do |commit|
-    puts "      *  #{commit[:line]}"
+    puts "       * #{commit[:line]}"
   end
 end
 
