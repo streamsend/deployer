@@ -20,6 +20,9 @@ options = Trollop::options do
   opt :project_dir, "The project directory", type: :string, default: @CREDS.project_dir
 end
 
+unless options[:pivotal_token]
+  options[:pivotal_token] = ENV["PIVOTAL_API_TOKEN"]
+end
 Trollop::die :pivotal_token, "must be set" unless options[:pivotal_token]
 Trollop::die :previous_version, "must be set" unless options[:previous_version]
 Trollop::die :project_dir, "must be set" unless options[:project_dir]

@@ -2,7 +2,7 @@ require "active_support"
 require "tracker_api"
 
 class PivotalActions
-ActiveSupport::Deprecation.silenced = true
+  ActiveSupport::Deprecation.silenced = true
 
   def initialize(token)
     @token = token
@@ -21,7 +21,6 @@ ActiveSupport::Deprecation.silenced = true
 
   def story(story_id)
     if story_id.match(%r/^\d+$/)
-      puts story_id
       project = projects.detect do |project|
         story_ids = @project_stories[project.id]
         unless story_ids
