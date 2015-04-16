@@ -1,8 +1,12 @@
 class Release
 
-  def initialize(streamsend_dir, version)
+  def initialize(streamsend_dir, version = nil)
     @dir = streamsend_dir
     @version = version
+    unless @version
+    @version = git_latest_tag
+  end
+
   end
 
   def commits
@@ -32,15 +36,34 @@ class Release
     end
   end
 
-  def print_story(story, pivotal)
-    puts " * #{story.name}"
-    puts "   * Pivotal Tracker [#{story.url} #{story.id}]"
-    puts "     * #{story.story_type},  #{story.current_state} #{story.accepted_at.to_s}, PROJECT = #{(pivotal.project_for_story story).name}"
+  def describe_commits_list commits
+    output = []
+    commits.each do |commit|
+      output << "       * #{commit[:line]}"
+    end
+    output.join("\n")
+  end
+
+  def describe_commits_brief commits
+    ids = commits.map do |commit|
+      commit[:commit_id]
+    end
+    "      * commits: #{ids.join(',')}"
+  end
+
+  def describe_story(story, pivotal)
+    output = " * #{story.name}"
+    output += "\n   * Pivotal Tracker [#{story.url} #{story.id}]"
+    output += "\n     * #{story.story_type},  #{story.current_state} #{story.accepted_at.to_s}, PROJECT = #{(pivotal.project_for_story story).name}"
+  end
+
+  def git_latest_tag
+    git_command("git describe --abbrev=0 --tags --match \"v[1-9].*\"").chomp
   end
 
   def git_diff_grep match_string
-    git_log = git_command "git diff --name-only #{@version}.. | grep #{match_string}"
-    git_log.split "\n"
+    git_log = git_command("git diff --name-only #{@version}.. | grep #{match_string}")
+    git_log.split("\n")
   end
 
   def git_diff_file file

@@ -18,13 +18,14 @@ options = Trollop::options do
   opt :previous_version, "The last released version", type: :string
   opt :pivotal_token, "The pivotal token", type: :string, default: @CREDS.pivotal_token
   opt :project_dir, "The project directory", type: :string, default: @CREDS.project_dir
+  opt :verbose, "Verbose", default: false
 end
 
 unless options[:pivotal_token]
   options[:pivotal_token] = ENV["PIVOTAL_API_TOKEN"]
 end
+
 Trollop::die :pivotal_token, "must be set" unless options[:pivotal_token]
-Trollop::die :previous_version, "must be set" unless options[:previous_version]
 Trollop::die :project_dir, "must be set" unless options[:project_dir]
 
 pivotal = PivotalActions.new(options[:pivotal_token])
@@ -38,17 +39,19 @@ stories_hash = release.stories_from_commits(git_log)
 puts "As of #{last_commit}"
 puts ""
 
-stories_hash.each do |storyid,v|
+stories_hash.each do |storyid, commits|
   story = pivotal.story(storyid)
   if story
-    release.print_story(story, pivotal)
+    puts release.describe_story(story, pivotal)
   else
     puts "* not-a-story #{storyid}"
   end
-
-  v.each do |commit|
-    puts "       * #{commit[:line]}"
+  if options[:verbose]
+    puts release.describe_commits_list commits
+  else
+    puts release.describe_commits_brief commits
   end
+  puts ""
 end
 
 # Misc items to report...
@@ -58,8 +61,6 @@ puts "\nDelayed Jobs"
 release.git_diff_grep('app/jobs').each do |value|
   print "* #{value}\n"
 end
-
-#git diff --name-only v2.95.. | grep app/jobs
 
 puts "\nGems\n"
 release.git_diff_file('Gemfile').each do |value|
