@@ -29,7 +29,7 @@ describe Release do
 
   describe "#describe_commits_list" do
     it "returns a list of commits" do
-      expect(release.describe_commits_list(commits)).to eq "\n       * #{commits[0][:line]}\n       * #{commits[1][:line]}"
+      expect(release.describe_commits_list(commits)).to eq "       * #{commits[0][:line]}\n       * #{commits[1][:line]}"
     end
   end
 
