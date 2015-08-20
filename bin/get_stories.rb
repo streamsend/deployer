@@ -40,11 +40,16 @@ puts "As of #{last_commit}"
 puts ""
 
 stories_hash.each do |storyid, commits|
-  story = pivotal.story(storyid)
+  story_id = storyid.dup
+  if story_id.match(%r/^#.*/)
+    story_id.slice!(0)
+  end
+
+  story = pivotal.story(story_id)
   if story
     puts release.describe_story(story, pivotal)
   else
-    puts "* not-a-story #{storyid}"
+    puts "* not-a-story #{story_id}"
   end
   if options[:verbose]
     puts release.describe_commits_list commits
@@ -59,26 +64,26 @@ end
 #Find new Delayed Jobs
 puts "\nDelayed Jobs"
 release.git_diff_grep('app/jobs').each do |value|
-  print "* #{value}\n"
+  print " * #{value}\n"
 end
 
 puts "\nGems\n"
 release.git_diff_file('Gemfile').each do |value|
-  puts "* #{value}"
+  puts " * #{value}"
 end
 release.git_diff_file('Gemfile.lock').each do |value|
-  puts "* #{value}"
+  puts " * #{value}"
 end
 
 puts "\nMigrations"
 release.git_diff_grep('db/migrate').each do |value|
-  puts "* #{value}"
+  puts " * #{value}"
 end
 
 
 puts "\nRake Tasks"
 release.git_diff_grep('lib/tasks').each do |value|
-  puts "* #{value}"
+  puts " * #{value}"
 end
 
 puts
