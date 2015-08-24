@@ -15,9 +15,9 @@ options = Trollop::options do
             Usage: get_stories.rb [options]
   TEXT
 
-  opt :previous_version, "The last released version", type: :string
-  opt :pivotal_token, "The pivotal token", type: :string, default: @CREDS.pivotal_token
-  opt :project_dir, "The project directory", type: :string, default: @CREDS.project_dir
+  opt :previous_version, "The last released version", type: :string, long: "previous-version"
+  opt :pivotal_token, "The pivotal token", type: :string, long: "pivotal-token", default: @CREDS.pivotal_token
+  opt :project_dir, "The project directory", type: :string, long: "project-dir", default: @CREDS.project_dir
   opt :verbose, "Verbose", default: false
 end
 
