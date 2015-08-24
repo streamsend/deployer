@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "tracker_api", "~> 0.2.0"
   spec.add_runtime_dependency "activesupport"
+  spec.add_runtime_dependency "multi_json"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
