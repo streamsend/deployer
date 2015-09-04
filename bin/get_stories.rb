@@ -15,7 +15,8 @@ options = Trollop::options do
             Usage: get_stories.rb [options]
   TEXT
 
-  opt :previous_version, "The last released version", type: :string, long: "previous-version"
+  opt :final_commit, "The final commit or branch", type: :string, long: "final-commit", default: "master"
+  opt :previous_release, "The previous release or commit", type: :string, long: "previous-commit"
   opt :pivotal_token, "The pivotal token", type: :string, long: "pivotal-token", default: @CREDS.pivotal_token
   opt :project_dir, "The project directory", type: :string, long: "project-dir", default: @CREDS.project_dir
   opt :verbose, "Verbose", default: false
@@ -30,13 +31,13 @@ Trollop::die :project_dir, "must be set" unless options[:project_dir]
 
 pivotal = PivotalActions.new(options[:pivotal_token])
 
-release = Release.new(options[:project_dir], options[:previous_version])
+release = Release.new(options[:project_dir], options[:previous_release], options[:final_commit])
 git_log = release.commits
 
-last_commit = git_log.first.split(" ")[0]
+final_commit = git_log.first.split(" ")[0]
 stories_hash = release.stories_from_commits(git_log)
 
-puts "As of #{last_commit}"
+puts "As of #{final_commit}"
 puts ""
 
 stories_hash.each do |storyid, commits|

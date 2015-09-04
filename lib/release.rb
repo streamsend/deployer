@@ -1,16 +1,16 @@
 class Release
 
-  def initialize(streamsend_dir, version = nil)
+  def initialize(streamsend_dir, initial_commit = nil, final_commit = "master")
     @dir = streamsend_dir
-    @version = version
-    unless @version
-    @version = git_latest_tag
-  end
-
+    @initial_commit = initial_commit
+    unless @initial_commit
+      @initial_commit = git_latest_tag
+    end
+    checkout(final_commit)
   end
 
   def commits
-    git_log = git_command "git log --oneline #{@version}.."
+    git_log = git_command "git log --oneline #{@initial_commit}.."
     git_log.split "\n"
   end
 
@@ -62,16 +62,27 @@ class Release
   end
 
   def git_diff_grep match_string
-    git_log = git_command("git diff --name-only #{@version}.. | grep #{match_string}")
+    git_log = git_command("git diff --name-only #{@initial_commit}.. | grep #{match_string}")
     git_log.split("\n")
   end
 
   def git_diff_file file
-    git_log = git_command "git diff #{@version}.. -U0 #{file}"
+    git_log = git_command "git diff #{@initial_commit}.. -U0 #{file}"
     git_log.split "\n"
   end
 
+  def git_tag_checked_out?(tag)
+    git_line = git_command("git log -n 1 --decorate --pretty=oneline")
+    git_line.include?(tag)
+  end
+
   private
+
+  def checkout(commit)
+    unless git_tag_checked_out?(commit)
+      git_command("git checkout #{commit}")
+    end
+  end
 
   def git_command command
     `cd #{@dir} && #{command}`
