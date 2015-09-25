@@ -10,7 +10,10 @@ class Release
   end
 
   def commits
-    git_log = git_command "git log --oneline #{@initial_commit}.."
+    puts "pwd = #{Dir.pwd}"
+    command = "git log --oneline #{@initial_commit}.."
+    git_log = git_command command
+    puts "command = '#{command}'"
     git_log.split "\n"
   end
 
@@ -85,6 +88,8 @@ class Release
   end
 
   def git_command command
-    `cd #{@dir} && #{command}`
+    original_dir = Dir.pwd
+    puts "current directory: #{Dir.pwd}"
+    `cd "#{@dir}" && #{command} && cd "#{original_dir}"`
   end
 end
