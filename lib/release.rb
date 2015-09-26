@@ -3,6 +3,7 @@ class Release
   def initialize(streamsend_dir, initial_commit = nil, final_commit = "master")
     @dir = streamsend_dir
     @initial_commit = initial_commit
+    @final_commit = final_commit
     unless @initial_commit
       @initial_commit = git_latest_tag
     end
@@ -11,7 +12,7 @@ class Release
 
   def commits
     puts "pwd = #{Dir.pwd}"
-    command = "git log --oneline #{@initial_commit}.."
+    command = "git log --oneline #{@initial_commit}..#{@final_commit}"
     git_log = git_command command
     puts "command = '#{command}'"
     git_log.split "\n"
