@@ -40,6 +40,9 @@ stories_hash = release.stories_from_commits(git_log)
 puts "As of #{final_commit}"
 puts ""
 
+not_stories = []
+stories = []
+commits_by_story = Hash.new
 stories_hash.each do |storyid, commits|
   story_id = storyid.dup
   if story_id.match(%r/^#.*/)
@@ -48,16 +51,48 @@ stories_hash.each do |storyid, commits|
 
   story = pivotal.story(story_id)
   if story
-    puts release.describe_story(story, pivotal)
+    stories << story
   else
-    puts "* not-a-story #{story_id}"
+    not_stories << story_id
   end
+  commits_by_story[story_id.to_i] = commits
+end
+
+states = ["accepted", "delivered", "finished", "started", "unstarted", "planned", "rejected", nil]
+
+stories_sorted = stories.sort_by { |story|
+  state_index = story.project_id
+  raise "unknown state #{story.current_state}" if states.index(story.current_state).nil?
+  state_index += states.index(story.current_state)
+  state_index
+}
+
+last_project = "nothing"
+
+stories_sorted.each do |story|
+  project_name = (pivotal.project_for_story story).name
+  if project_name != last_project
+    puts project_name + "\n"
+    last_project = project_name
+  end
+  puts release.describe_story(story, pivotal)
+  commits = commits_by_story[story.id]
+  if commits.nil?
+    puts "(no commits) for #{story.id}?"
+  end
+
   if options[:verbose]
-    puts release.describe_commits_list commits
+    puts release.describe_commits_list commits_by_story[story.id]
   else
-    puts release.describe_commits_brief commits
+    if story.current_state != 'accepted'
+      puts release.describe_commits_brief commits_by_story[story.id]
+    end
   end
-  puts ""
+end
+
+puts "non-stories in commits"
+not_stories.each do |not_story|
+  puts not_story
 end
 
 # Misc items to report...
@@ -88,4 +123,3 @@ release.git_diff_grep('lib/tasks').each do |value|
 end
 
 puts
-

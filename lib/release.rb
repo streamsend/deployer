@@ -55,8 +55,12 @@ class Release
 
   def describe_story(story, pivotal)
     output = " * #{story.name}"
-    output += "\n   * Pivotal Tracker [#{story.url} #{story.id}]"
-    output += "\n     * #{story.story_type},  #{story.current_state} #{story.accepted_at.to_s}, PROJECT = #{(pivotal.project_for_story story).name}"
+    if story.current_state == 'accepted'
+      state = "#{story.current_state} #{story.accepted_at.to_s}"
+    else
+      state = "'''''" + story.current_state + "'''''"
+    end
+    output += "\n   * Pivotal Tracker [#{story.url} #{story.id}], #{story.story_type}, #{state}"
   end
 
   def git_latest_tag
