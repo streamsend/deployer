@@ -29,8 +29,8 @@ class Release
   end
 
   def story_from_commit commit
-    git_output = git_command "git show --format=%B #{commit}"
-    story_match = git_output.match(/\nStory:\s*.*?(\d+)/m)
+    git_output = git_command "git log -n 1 #{commit}"
+    story_match = git_output.match(/Story:\s*.*?(\d+)/m)
     if story_match
      story_match.captures[0]
     else
