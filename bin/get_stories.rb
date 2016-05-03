@@ -52,11 +52,10 @@ stories_hash.each do |storyid, commits|
   story = pivotal.story(story_id)
   if story
     stories << story
-  else
-    not_stories << story_id
   end
   commits_by_story[story_id.to_i] = commits
 end
+not_stories = stories_hash["None"]
 
 states = ["accepted", "delivered", "finished", "started", "unstarted", "planned", "rejected", nil]
 
@@ -90,14 +89,19 @@ stories_sorted.each do |story|
   end
 end
 
-puts "non-stories in commits"
-not_stories.each do |not_story|
-  puts not_story
+puts
+puts "Commits with no story ids:"
+puts
+
+not_stories.reject! { |commit| commit[:line] =~ /^\w{7} Merge branch/ }
+not_stories.each do |commit|
+  puts " * #{commit[:line]}"
 end
 
 # Misc items to report...
 
 #Find new Delayed Jobs
+
 puts "\nDelayed Jobs"
 release.git_diff_grep('app/jobs').each do |value|
   print " * #{value}\n"
