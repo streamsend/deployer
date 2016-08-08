@@ -67,8 +67,12 @@ class Release
     git_command("git describe --abbrev=0 --tags --match \"v[1-9].*\"").chomp
   end
 
-  def git_diff_grep match_string
-    git_log = git_command("git diff --name-only #{@initial_commit}.. | grep #{match_string}")
+  def git_diff_grep match_string, exclude = nil
+    if exclude
+      git_log = git_command("git diff --name-only #{@initial_commit}.. | grep #{match_string} | grep -v #{exclude}")
+    else
+      git_log = git_command("git diff --name-only #{@initial_commit}.. | grep #{match_string}")
+    end
     git_log.split("\n")
   end
 

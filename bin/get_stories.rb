@@ -111,6 +111,7 @@ puts "\nGems\n"
 release.git_diff_file('Gemfile').each do |value|
   puts " * #{value}"
 end
+puts
 release.git_diff_file('Gemfile.lock').each do |value|
   puts " * #{value}"
 end
@@ -120,9 +121,13 @@ release.git_diff_grep('db/migrate').each do |value|
   puts " * #{value}"
 end
 
-
 puts "\nRake Tasks"
 release.git_diff_grep('lib/tasks').each do |value|
+  puts " * #{value}"
+end
+
+puts "\nConfig Files"
+release.git_diff_grep('config/', 'routes.rb').each do |value|
   puts " * #{value}"
 end
 
