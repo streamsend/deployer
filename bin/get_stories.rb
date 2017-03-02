@@ -55,7 +55,7 @@ stories_hash.each do |storyid, commits|
   end
   commits_by_story[story_id.to_i] = commits
 end
-not_stories = stories_hash["None"]
+not_stories = stories_hash["None"] if stories_hash["None"]
 
 states = ["accepted", "delivered", "finished", "started", "unstarted", "planned", "rejected", nil]
 
